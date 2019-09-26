@@ -1,5 +1,6 @@
 package org.soraworld.dailyactivity.listener;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -42,7 +43,7 @@ public class ActionListener implements Listener {
                     }
                     amount = 0;
                 }
-                DataAPI.setTemp(uuid, KILL_AMOUNT_KEY, amount);
+                DataAPI.setTempInt(uuid, KILL_AMOUNT_KEY, amount);
             }
         }
     }
@@ -54,10 +55,10 @@ public class ActionListener implements Listener {
         amount++;
         if (amount >= manager.getChatMax()) {
             if (manager.giveActivation(event.getPlayer(), 1)) {
-                manager.sendKey(event.getPlayer(), "chatOneActivation");
+                Bukkit.getScheduler().runTaskLater(manager.getPlugin(), () -> manager.sendKey(event.getPlayer(), "chatOneActivation"), 2);
             }
             amount = 0;
         }
-        DataAPI.setTemp(uuid, KILL_AMOUNT_KEY, amount);
+        DataAPI.setTempInt(uuid, CHAT_AMOUNT_KEY, amount);
     }
 }

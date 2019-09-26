@@ -42,7 +42,7 @@ public final class DailyActivity extends SpigotPlugin<ActivityManager> {
                     }
                     amount = 0;
                 }
-                DataAPI.setTemp(uuid, ONLINE_AMOUNT_KEY, amount);
+                DataAPI.setTempInt(uuid, ONLINE_AMOUNT_KEY, amount);
             }
         }, 12000, 12000);
     }

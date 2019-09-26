@@ -58,11 +58,11 @@ public class ActivityManager extends VManager {
             int lastDay = DataAPI.getStoreInt(uuid, LAST_REDEEM_KEY, 0);
             if (today != lastDay) {
                 String command = giveKitCommand.replaceAll("\\$\\{player}", player.getName()).replaceAll("\\$\\{name}", name);
-                int activation = DataAPI.getStoreInt(uuid, KIT_ACTIVATION_KEY, 0);
+                long activation = DataAPI.getStoreLong(uuid, KIT_ACTIVATION_KEY);
                 if (hasPermission(player, kit.getPermission())) {
                     if (activation >= kit.getPrice()) {
-                        DataAPI.setStore(uuid, KIT_ACTIVATION_KEY, activation - kit.getPrice());
-                        DataAPI.setStore(uuid, LAST_REDEEM_KEY, today);
+                        giveActivation(player, -kit.getPrice());
+                        DataAPI.setStoreInt(uuid, LAST_REDEEM_KEY, today);
                         Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), command);
                     } else {
                         sendKey(player, "notEnoughActivation");
@@ -78,11 +78,11 @@ public class ActivityManager extends VManager {
 
     public void showInfo(Player player) {
         sendKey(player, getActivation(player));
-        sendKey(player, "infoActivation", DataAPI.getStoreInt(player.getUniqueId(), KIT_ACTIVATION_KEY, 0));
+        sendKey(player, "infoActivation", DataAPI.getStoreLong(player.getUniqueId(), KIT_ACTIVATION_KEY));
     }
 
     public String getActivation(Player player) {
-        int activation = DataAPI.getStoreInt(player.getUniqueId(), KIT_ACTIVATION_KEY, 0);
+        long activation = DataAPI.getStoreLong(player.getUniqueId(), KIT_ACTIVATION_KEY);
         long size = Math.round(1.0D * activation / maxActivation * progressLength);
         StringBuilder builder = new StringBuilder();
         for (int i = 1; i <= progressLength; i++) {
@@ -96,12 +96,12 @@ public class ActivityManager extends VManager {
     }
 
     public boolean giveActivation(Player player, int amount) {
-        int activation = DataAPI.getStoreInt(player.getUniqueId(), KIT_ACTIVATION_KEY, 0);
+        long activation = DataAPI.getStoreLong(player.getUniqueId(), KIT_ACTIVATION_KEY);
         if (activation + amount <= maxActivation) {
-            DataAPI.setStore(player.getUniqueId(), KIT_ACTIVATION_KEY, activation + amount);
+            DataAPI.setStoreLong(player.getUniqueId(), KIT_ACTIVATION_KEY, activation + amount);
             return true;
         } else {
-            DataAPI.setStore(player.getUniqueId(), KIT_ACTIVATION_KEY, maxActivation);
+            DataAPI.setStoreLong(player.getUniqueId(), KIT_ACTIVATION_KEY, maxActivation);
             return false;
         }
     }
@@ -116,9 +116,5 @@ public class ActivityManager extends VManager {
 
     public int getOnlineMax() {
         return onlineMax;
-    }
-
-    public long getMaxActivation() {
-        return maxActivation;
     }
 }

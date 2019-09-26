@@ -5,11 +5,8 @@ import org.bukkit.entity.Player;
 import org.soraworld.dailyactivity.manager.ActivityManager;
 import org.soraworld.violet.command.Sub;
 import org.soraworld.violet.command.SubExecutor;
-import org.soraworld.violet.data.DataAPI;
 import org.soraworld.violet.inject.Command;
 import org.soraworld.violet.inject.Inject;
-
-import static org.soraworld.dailyactivity.manager.ActivityManager.KIT_ACTIVATION_KEY;
 
 /**
  * @author Himmelt
@@ -26,9 +23,7 @@ public final class CommandActivity {
             Player player = Bukkit.getPlayer(args.first());
             if (player != null) {
                 try {
-                    int value = Integer.parseInt(args.get(1));
-                    int activation = DataAPI.getStoreInt(player.getUniqueId(), KIT_ACTIVATION_KEY, 0);
-                    DataAPI.setStore(player.getUniqueId(), KIT_ACTIVATION_KEY, activation + value);
+                    manager.giveActivation(player, Integer.parseInt(args.get(1)));
                 } catch (Throwable e) {
                     e.printStackTrace();
                 }
@@ -44,9 +39,7 @@ public final class CommandActivity {
             Player player = Bukkit.getPlayer(args.first());
             if (player != null) {
                 try {
-                    int value = Integer.parseInt(args.get(1));
-                    int activation = DataAPI.getStoreInt(player.getUniqueId(), KIT_ACTIVATION_KEY, 0);
-                    DataAPI.setStore(player.getUniqueId(), KIT_ACTIVATION_KEY, activation - value);
+                    manager.giveActivation(player, -Integer.parseInt(args.get(1)));
                 } catch (Throwable e) {
                     e.printStackTrace();
                 }
