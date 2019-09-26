@@ -1,0 +1,13 @@
+name: DailyActivity
+version: ${version}
+author: Himmelt
+main: org.soraworld.dailyactivity.DailyActivity
+depend:
+  - Violet
+softdepend:
+  - PlaceholderAPI
+website: https://github.com/Himmelt/DailyActivity
+description: DailyActivity Plugin.
+permissions:
+  dailyactivity.admin:
+    default: op

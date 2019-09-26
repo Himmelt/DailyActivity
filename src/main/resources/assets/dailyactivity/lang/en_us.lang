@@ -1,0 +1,24 @@
+# English Language File
+# Please keep UTF-8 encoding
+
+chatHead = "[DailyActivity] "
+
+notEnoughActivation = "你没有足够的活跃度."
+infoActivation = "你当前的活跃度是: %d ."
+alreadyRedeemToday = "今日你已兑换过礼包."
+hasNoPerm = "此礼包需要权限 <%s> 才能兑换."
+killOneActivation = "杀怪获得 1 点活跃度."
+chatOneActivation = "发言获得 1 点活跃度."
+onlineOneActivation = "在线时长获得 1 点活跃度."
+
+placeholder {
+  notHook = "PlaceholderAPI 变量插件没有对接，此功能不可用 !"
+  expansionSuccess = "PlaceholderAPI 称号扩展 注册成功."
+  expansionFailed = "PlaceholderAPI 称号扩展 注册失败 !"
+}
+
+comment {
+  maxActivation = "活跃值上限."
+  giveKitCommand = "给与礼包的命令, 用 ${player} 表示玩家名, ${name} 表示礼包名."
+  kitPrices = "兑换礼包所需活跃度. 名称 <-> 礼包活跃度"
+}
