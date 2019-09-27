@@ -35,7 +35,7 @@ public class ActionListener implements Listener {
             Player player = (Player) damager;
             UUID uuid = player.getUniqueId();
             if (event.getFinalDamage() >= ((Creature) damagee).getHealth()) {
-                int amount = DataAPI.getTempInt(uuid, KILL_AMOUNT_KEY, 0);
+                int amount = DataAPI.getTempInt(uuid, KILL_AMOUNT_KEY);
                 amount++;
                 if (amount >= manager.getKillMax()) {
                     if (manager.giveActivation(player, 1)) {
@@ -51,7 +51,7 @@ public class ActionListener implements Listener {
     @EventHandler
     public void onAsyncPlayerChat(AsyncPlayerChatEvent event) {
         UUID uuid = event.getPlayer().getUniqueId();
-        int amount = DataAPI.getTempInt(uuid, CHAT_AMOUNT_KEY, 0);
+        int amount = DataAPI.getTempInt(uuid, CHAT_AMOUNT_KEY);
         amount++;
         if (amount >= manager.getChatMax()) {
             if (manager.giveActivation(event.getPlayer(), 1)) {
