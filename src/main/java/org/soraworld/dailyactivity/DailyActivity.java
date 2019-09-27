@@ -28,7 +28,7 @@ public final class DailyActivity extends SpigotPlugin<ActivityManager> {
                 manager.consoleKey("placeholder.expansionFailed");
             }
         } catch (Throwable ignored) {
-            manager.console(ChatColor.RED + "NameExpansion Construct Instance failed !!!");
+            manager.console(ChatColor.RED + "ActivityExpansion Construct Instance failed !!!");
             manager.consoleKey("placeholder.notHook");
         }
         Bukkit.getScheduler().runTaskTimer(this, () -> {
