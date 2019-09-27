@@ -34,7 +34,7 @@ public final class DailyActivity extends SpigotPlugin<ActivityManager> {
         Bukkit.getScheduler().runTaskTimer(this, () -> {
             for (Player player : Bukkit.getOnlinePlayers()) {
                 UUID uuid = player.getUniqueId();
-                int amount = DataAPI.getTempInt(uuid, ONLINE_AMOUNT_KEY, 0);
+                int amount = DataAPI.getTempInt(uuid, ONLINE_AMOUNT_KEY);
                 amount++;
                 if (amount >= manager.getOnlineMax()) {
                     if (manager.giveActivation(player, 1)) {
