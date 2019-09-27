@@ -55,7 +55,7 @@ public class ActivityManager extends VManager {
         if (kit != null) {
             UUID uuid = player.getUniqueId();
             int today = Calendar.getInstance().get(Calendar.DAY_OF_YEAR);
-            int lastDay = DataAPI.getStoreInt(uuid, LAST_REDEEM_KEY, 0);
+            int lastDay = DataAPI.getStoreInt(uuid, LAST_REDEEM_KEY);
             if (today != lastDay) {
                 String command = giveKitCommand.replaceAll("\\$\\{player}", player.getName()).replaceAll("\\$\\{name}", name);
                 long activation = DataAPI.getStoreLong(uuid, KIT_ACTIVATION_KEY);
