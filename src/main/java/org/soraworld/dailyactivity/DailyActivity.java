@@ -28,13 +28,13 @@ public final class DailyActivity extends SpigotPlugin<ActivityManager> {
                 manager.consoleKey("placeholder.expansionFailed");
             }
         } catch (Throwable ignored) {
-            manager.console(ChatColor.RED + "NameExpansion Construct Instance failed !!!");
+            manager.console(ChatColor.RED + "ActivityExpansion Construct Instance failed !!!");
             manager.consoleKey("placeholder.notHook");
         }
         Bukkit.getScheduler().runTaskTimer(this, () -> {
             for (Player player : Bukkit.getOnlinePlayers()) {
                 UUID uuid = player.getUniqueId();
-                int amount = DataAPI.getTempInt(uuid, ONLINE_AMOUNT_KEY, 0);
+                int amount = DataAPI.getTempInt(uuid, ONLINE_AMOUNT_KEY);
                 amount++;
                 if (amount >= manager.getOnlineMax()) {
                     if (manager.giveActivation(player, 1)) {
