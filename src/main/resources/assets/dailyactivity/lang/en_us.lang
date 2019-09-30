@@ -5,7 +5,7 @@ chatHead = "[DailyActivity] "
 
 notEnoughActivation = "你没有足够的活跃度."
 infoActivation = "你当前的活跃度是: %d ."
-alreadyRedeemToday = "今日你已兑换过礼包."
+alreadyRedeemToday = "今日你已兑换过 %s 礼包."
 hasNoPerm = "此礼包需要权限 <%s> 才能兑换."
 killOneActivation = "杀怪获得 1 点活跃度."
 chatOneActivation = "发言获得 1 点活跃度."

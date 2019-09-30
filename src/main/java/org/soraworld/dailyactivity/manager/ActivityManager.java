@@ -55,14 +55,16 @@ public class ActivityManager extends VManager {
         if (kit != null) {
             UUID uuid = player.getUniqueId();
             int today = Calendar.getInstance().get(Calendar.DAY_OF_YEAR);
-            int lastDay = DataAPI.getStoreInt(uuid, LAST_REDEEM_KEY, 0);
-            if (today != lastDay) {
+            HashMap<String, Integer> lastBuyMap = DataAPI.getStore(uuid, LAST_REDEEM_KEY, new HashMap<>(), HashMap.class);
+            int lastBuyDay = lastBuyMap.getOrDefault(name, 0);
+            if (today != lastBuyDay) {
                 String command = giveKitCommand.replaceAll("\\$\\{player}", player.getName()).replaceAll("\\$\\{name}", name);
                 long activation = DataAPI.getStoreLong(uuid, KIT_ACTIVATION_KEY);
                 if (hasPermission(player, kit.getPermission())) {
                     if (activation >= kit.getPrice()) {
                         giveActivation(player, -kit.getPrice());
-                        DataAPI.setStoreInt(uuid, LAST_REDEEM_KEY, today);
+                        lastBuyMap.put(name, today);
+                        DataAPI.setStore(uuid, LAST_REDEEM_KEY, lastBuyMap);
                         Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), command);
                     } else {
                         sendKey(player, "notEnoughActivation");
@@ -71,7 +73,7 @@ public class ActivityManager extends VManager {
                     sendKey(player, "hasNoPerm", kit.getPermission());
                 }
             } else {
-                sendKey(player, "alreadyRedeemToday");
+                sendKey(player, "alreadyRedeemToday", name);
             }
         }
     }
